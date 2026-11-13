@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#05070f" />
+  <title>하늘지도</title>
+  <script type="module" crossorigin src="./assets/index-TV3qEjD6.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BLT79Xt2.css">
+</head>
+<body>
+  <canvas id="sky"></canvas>
+
+  <header class="topbar">
+    <span class="brand">하늘지도</span>
+    <button id="chip-location" class="chip" title="위치 바꾸기">📍 서울 (기본 위치)</button>
+    <button id="btn-night" class="chip" title="어두운 곳에서 눈부심을 줄입니다">🔴 야간 모드</button>
+    <span id="chip-compass" class="chip" hidden></span>
+  </header>
+
+  <!-- 누른 천체의 설명 카드 -->
+  <aside id="info-card" class="info-card" hidden>
+    <button id="btn-info-close" class="info-close" aria-label="닫기">✕</button>
+    <div id="info-title" class="info-title"></div>
+    <div id="info-subtitle" class="info-subtitle"></div>
+    <div id="info-where" class="info-where"></div>
+    <div id="info-body" class="info-body"></div>
+  </aside>
+
+  <footer class="bottombar">
+    <div id="readout" class="readout">–</div>
+    <div id="today" class="today">–</div>
+
+    <div id="calibration" class="calibration" hidden>
+      <span id="calibration-text"></span>
+      <button id="btn-calibration-reset" class="link-btn">나침반으로 되돌리기</button>
+    </div>
+    <div id="hint" class="hint">화면을 끌어서 하늘을 둘러보세요.</div>
+
+    <!-- 시간 여행 도구: "시간" 버튼으로 펼친다 -->
+    <div id="time-tools" class="time-tools" hidden>
+      <div class="time-row">
+        <button id="btn-day-back" title="하루 전">◀ 하루</button>
+        <input id="date-input" type="date" aria-label="날짜 고르기" />
+        <button id="btn-day-forward" title="하루 뒤">하루 ▶</button>
+      </div>
+      <canvas id="time-band" class="time-band" title="밀어서 시각 바꾸기"></canvas>
+      <div class="shortcuts">
+        <button data-shortcut="now">지금</button>
+        <button data-shortcut="sunset">오늘 일몰</button>
+        <button data-shortcut="evening">밤 9시</button>
+        <button data-shortcut="fullmoon">다음 보름</button>
+        <button data-shortcut="june">하지</button>
+        <button data-shortcut="december">동지</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="btn-sensor" class="primary">📱 폰으로 보기</button>
+      <div class="time-controls">
+        <button id="btn-tonight">오늘 밤</button>
+        <button id="btn-time">시간</button>
+        <button id="btn-year">1년</button>
+      </div>
+    </div>
+    <div id="clock" class="clock">–</div>
+  </footer>
+
+  <!-- 오늘 밤 -->
+  <section id="panel-tonight" class="sheet" hidden>
+    <header class="sheet-head">
+      <h2 id="tonight-title">오늘 밤</h2>
+      <button class="sheet-close" data-close aria-label="닫기">✕</button>
+    </header>
+    <div id="tonight-body" class="sheet-body"></div>
+  </section>
+
+  <!-- 1년 보기 -->
+  <section id="panel-year" class="sheet" hidden>
+    <header class="sheet-head">
+      <h2 id="year-title">1년 보기</h2>
+      <button class="sheet-close" data-close aria-label="닫기">✕</button>
+    </header>
+    <div class="sheet-body">
+      <div id="year-bodies" class="shortcuts"></div>
+      <canvas id="year-chart" class="year-chart"></canvas>
+      <p id="year-caption" class="sheet-note"></p>
+    </div>
+  </section>
+
+  <!-- 위치 고르기 -->
+  <section id="panel-city" class="sheet" hidden>
+    <header class="sheet-head">
+      <h2>어디에서 보나요?</h2>
+      <button class="sheet-close" data-close aria-label="닫기">✕</button>
+    </header>
+    <div class="sheet-body">
+      <button id="btn-gps" class="wide-btn">📡 내 위치 찾기 (GPS)</button>
+      <div id="city-list" class="city-list"></div>
+      <p class="sheet-note">시각은 이 기기의 시간대로 표시합니다.</p>
+    </div>
+  </section>
+
+  <!-- 야간 모드: 화면 전체를 붉은색만 남기는 덮개 -->
+  <div id="night-filter" class="night-filter" hidden></div>
+
+</body>
+</html>
